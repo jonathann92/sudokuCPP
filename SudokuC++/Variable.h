@@ -15,7 +15,7 @@ class Variable {
 	bool modified;
 	bool unchangeable;
 	string name = "v";
-	Trail trail = Trail::TRAIL.getTrail();
+	Trail trail = Trail::getTrail();
 	int oldSize;
 
 public:
@@ -32,7 +32,7 @@ public:
 		row = xrow;
 		col = xcol;
 		block = xblock;
-		name.append(std::to_string(namingCounter));
+		name.append(std::to_string(++namingCounter));
 		oldSize = size();
 	}
 
@@ -128,12 +128,8 @@ public:
 		trail.push(*this);
 	}
 
-
-
-
-
 };
 
-
+int Variable::namingCounter = 0;
 
 #endif

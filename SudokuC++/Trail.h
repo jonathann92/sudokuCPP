@@ -2,7 +2,8 @@
 #define TRAIL_H
 
 #include<stack>
-#include<utility>
+//#include<utility>
+#include<algorithm>
 #include "Variable.h"
 #include "Domain.h"
 using std::stack;
@@ -10,22 +11,23 @@ using std::stack;
 class Trail {
 	static stack<int> breadcrumbs;
 	static stack < std::pair <Variable, Domain> > trail;
-
+	static Trail TRAIL;
 
 	Trail() {}
 
 
 public:
-	static Trail TRAIL;
+
 
 	~Trail() {}
 
-	Trail getTrail() {
+	static Trail getTrail() {
 		return TRAIL;
 	}
 
 	void clearTrail() {
-		trail.clear();
+		stack < std::pair <Variable, Domain> > empty;
+		std::swap(trail, empty);
 	}
 
 	int size() {
@@ -33,7 +35,7 @@ public:
 	}
 
 	void placeBreadCrumb() {
-		breadcrumbs.add(trail.size());
+		breadcrumbs.push(trail.size());
 	}
 
 	void push(Variable &v) {
@@ -45,11 +47,16 @@ public:
 		int targetSize = breadcrumbs.top();
 		breadcrumbs.pop();
 		for (int size = trail.size(); size > targetSize; --size) {
-			std::pair <Variable, Domain> vPair = trail.pop();
+			std::pair <Variable, Domain> vPair = trail.top();
+			trail.pop();
 			vPair.first.setDomain(vPair.second);
 		}
 	}
 
 };
+
+stack<int> Trail::breadcrumbs;
+stack < std::pair <Variable, Domain> > Trail::trail;
+Trail Trail::TRAIL;
 
 #endif

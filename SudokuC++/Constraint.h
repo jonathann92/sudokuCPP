@@ -1,5 +1,7 @@
 #ifndef CONSTRAINT_H
 #define CONSTRAINT_H
+
+
 #include<vector>
 #include<algorithm>
 #include "Variable.h"

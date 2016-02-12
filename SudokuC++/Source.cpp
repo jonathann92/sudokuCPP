@@ -3,25 +3,27 @@
 #include<iterator>
 #include<algorithm>
 #include<stack>
+#include "Employee.h"
 
 using namespace std;
 
-struct Emp {
-	int x, y, z;
-	Emp(int a, int b, int c) {
-		x = a; y = b; z = c;
-	}
-	Emp(const Emp &e) {
-		*this = e;
-	}
-};
+void test(Emp *&x) {
+	Emp *b=  new Emp(4, 5);
+	cout << b->a;
+	x = b;
+	cout << x->a;
 
+}
 
 int main(int argc, char* args[]) {
 	int end;
 
-	Emp a = Emp(1, 2, 3);
-	cout << a.x;
+	Emp *a = new Emp(1, 2);
+	test(a);
+	cout << a->a;
+
+
+
 
 	stack < std::pair <string, int> > x;
 
