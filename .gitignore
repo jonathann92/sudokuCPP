@@ -234,3 +234,11 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# ignore all files in Debug directory
+Debug/
+SudokuC++/Debug
+*.sdf
+*.sln
+*.opendb
+
